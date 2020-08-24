@@ -5,19 +5,21 @@ class Error(Exception):
     """Base class for other exceptions"""
     pass
 
-class LeapYearError(Error): # for larger values
+class LeapYearError(Error): # for when feb has 29 days in a non leap year
     """Raised when february 29th is input on a non_leap year"""
     pass
+
 # Next we start writting the program 
 # Get year first
+# limited the years to 1500-2020 just for test purpose
 
 while True:
     try:
         birth_year = int(input("Enter your year of birth: "))
-        if birth_year < 1500 or birth_year > 2020:
+        if birth_year < 1500 or birth_year > 2020:  # limiting the years
             raise ValueError
         break
-    except ValueError:
+    except ValueError:  #error message shown when user inputs a value not within range
         print("Sorry that is not a valid year")
 
 # function for calculating if input year is a leap year
@@ -32,7 +34,7 @@ def leap_year(year):
         return False
 
 # first we get the values before executing the formula 
-
+# Getting the birth month
 while True:
     try:
         birth_month = int(input("Enter your birth month as a number between 1-12 : ")) # Placeholder message to the user
@@ -47,6 +49,9 @@ while True:
 # E.g February has 28 or 29 days, January, March, May, July, August, october and dec have 31 days while others have 30
 
 # we can create a dictionary to reference the keys for the birth months below
+# #### this is not compulsory, just creating it to help with clarity when writting ...
+# #### error messages to the users
+# the user input month values act as the dictionary keys 
 months = {1:"January", 2:"February", 3: "March", 4:"April", 5:"May", 6:"June", 
           7: "July", 8:"August", 9:"September", 10: "October", 11: "November", 12 : "December"}
 
@@ -62,7 +67,7 @@ while True:
         if birth_month == 2 and birth_date<1 or birth_date > 29:
             raise ValueError
         break
-        if birth_month in [1, 3, 5, 7, 8, 10, 12] and birth_date <1 or birth_date > 31:
+        if birth_month in [1, 3, 5, 7, 8, 10, 12] and birth_date <1 and birth_date > 31:
             raise ValueError
         break
         if birth_month == 4 or 6 or 9 or 11 and birth_date <1 or birth_date> 30:
@@ -73,8 +78,10 @@ while True:
     except LeapYearError:
         print("February cannot have 29 days in non leap years")
 
+# After getting dates we now get the gender from the user
 print("now select your gender")
-gender = ""
+gender = ""  # Give the gender an initial empty value then later assign 
+            # it based on fullfilled condition from the loop below
 while True:
     try:
         gender_selection = int(input("Select 1 for Male and 2 for Female: "))
@@ -90,12 +97,16 @@ while True:
     except ValueError:
         print("That number is not a valid selection of either 1 or 2")
 
-century = int(str(birth_year)[:2])
-cc = century
+# Getting the century which we need in the final calculation
+century = int(str(birth_year)[:2])   # converting the integer value to string before getting it's first characters
+cc = century  #Assigning the value to a shorter variable name to help later with the formula
 
-year_digits = int(str(birth_year)[2:])
-yy = year_digits
+year_digits = int(str(birth_year)[2:])  #use same method for the last 2 digits
+yy = year_digits   # asign it to a shorter variable name for clarity when using the formula
 
+# same with these below, assigning the variable names to shorter names 
+# to avoid cluttering the formula later
+# This is optional 
 dd = birth_date
 mm = birth_month
 by = birth_year
