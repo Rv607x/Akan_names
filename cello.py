@@ -1,20 +1,8 @@
-# python program similar to your Assignment
-
 # first I will create my own custom errors for user inputs
 
 # define Python user-defined exceptions
 class Error(Exception):
     """Base class for other exceptions"""
-    pass
-
-
-class NotAValidDateError(Error): # raised for smaller values 
-    """Raised when the input date is either zero or more that days of a month"""
-    pass
-
-
-class ValueTooLargeError(Error): # for larger values
-    """Raised when the input value is too large"""
     pass
 
 class LeapYearError(Error): # for larger values
