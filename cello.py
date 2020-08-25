@@ -61,18 +61,25 @@ months = {1:"January", 2:"February", 3: "March", 4:"April", 5:"May", 6:"June",
 while True:
     try:
         birth_date = int(input("Please enter the day of birth: "))
-        if birth_month == 2 and leap_year(birth_year) == False and birth_date > 28:
+        #  create a list for the days with 30 and days with 31 days
+        days_30 = [4, 6, 9, 11]
+        days_31 = [1, 3, 5, 7, 8, 10, 12]
+        #  start first with the days with 31 days, then 30 days then finally february 
+        if birth_month in days_31:
+            if birth_date not in range(1, 32):  #  Range is is 32 since python counts to the value before the last listed value
+                raise ValueError
+            break
+        elif birth_month in days_30:
+            if birth_date not in range(1, 31):
+                raise ValueError
+            break
+        elif birth_month == 2 and leap_year(birth_year) == False and birth_date > 28:
             raise LeapYearError
         break
         if birth_month == 2 and birth_date<1 or birth_date > 29:
             raise ValueError
         break
-        if birth_month in [1, 3, 5, 7, 8, 10, 12] and birth_date <1 and birth_date > 31:
-            raise ValueError
-        break
-        if birth_month == 4 or 6 or 9 or 11 and birth_date <1 or birth_date> 30:
-            raise ValueError
-            break
+        
     except ValueError:
         print("That is not a valid date in the month of "+ months[birth_month])
     except LeapYearError:
