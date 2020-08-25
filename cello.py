@@ -1,6 +1,6 @@
 # first I will create my own custom errors for user inputs
 
-# define Python user-defined exceptions
+# my own defined exceptions for custom errors that I will use later
 class Error(Exception):
     """Base class for other exceptions"""
     pass
@@ -79,17 +79,20 @@ while True:
         if birth_month == 2 and birth_date<1 or birth_date > 29:
             raise ValueError
         break
-        
+    # Custom message for the error raised     
     except ValueError:
         print("That is not a valid date in the month of "+ months[birth_month])
-    except LeapYearError:
+    except LeapYearError:   # Calling the custom exception that I defined at the start of the code
         print("February cannot have 29 days in non leap years")
 
 # After getting dates we now get the gender from the user
 print("now select your gender")
 gender = ""  # Give the gender an initial empty value then later assign 
             # it based on fullfilled condition from the loop below
-while True:
+
+# I use while loops because this is a commandline program hence allows the question to ...
+# ...be asked several times without the programming exiting when wrong answer is given            
+while True:    
     try:
         gender_selection = int(input("Select 1 for Male and 2 for Female: "))
         if gender_selection == 1:
